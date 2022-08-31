@@ -1,13 +1,13 @@
 package com.liwux.io;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.ReferenceCountUtil;
 
 public class Client {
     public static void main(String[] args) {
@@ -18,8 +18,8 @@ public class Client {
 
         //辅助启动类
         Bootstrap bootstrap = new Bootstrap();
-        /*
-        *
+        /**
+         *
         try {
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)//Netty 自定义，可以传BIO和AIO
@@ -50,7 +50,7 @@ public class Client {
                 }
             });
             future.sync();
-            System.out.println("ssss");
+            future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
@@ -63,6 +63,28 @@ class ClientChannelInitializer extends ChannelInitializer<SocketChannel>{
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        System.out.println(ch);
+        ch.pipeline().addLast(new ClientChildHandler());
+    }
+}
+
+class ClientChildHandler extends ChannelInboundHandlerAdapter {
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        ByteBuf buf = null;
+        try{
+            buf = (ByteBuf) msg;
+            byte[] bytes = new byte[buf.readableBytes()];
+            buf.getBytes(buf.readerIndex(),bytes);
+            System.out.println(new String(bytes));
+        }finally {
+            if (buf!=null) ReferenceCountUtil.refCnt(buf);
+        }
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        //channel第一次连上可用，写出一个字符串 JVM直接访问内存 跳过了垃圾回收机制，就需要进行释放
+        ByteBuf buf = Unpooled.copiedBuffer("hello".getBytes());
+        ctx.writeAndFlush(buf);
     }
 }
