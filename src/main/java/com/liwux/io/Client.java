@@ -18,8 +18,8 @@ public class Client {
 
         //辅助启动类
         Bootstrap bootstrap = new Bootstrap();
-        /**
-         *
+        /*
+        *
         try {
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)//Netty 自定义，可以传BIO和AIO
