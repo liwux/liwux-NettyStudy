@@ -21,7 +21,6 @@ public class Server {
         EventLoopGroup bossLoopGroup = new NioEventLoopGroup(1);
         // workloop 负责处理
         EventLoopGroup workLoopGroup = new NioEventLoopGroup(2);
-
         try{
             ServerBootstrap bootstrap = new ServerBootstrap();
             ChannelFuture channelFuture = bootstrap.group(bossLoopGroup,workLoopGroup)
@@ -72,6 +71,7 @@ class ServerChildHandler extends ChannelInboundHandlerAdapter{
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
+        Server.
         ctx.close();
     }
 }

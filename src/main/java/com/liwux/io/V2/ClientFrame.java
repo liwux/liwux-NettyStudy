@@ -5,8 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ClientFrame extends Frame {
+
+    private static final ClientFrame INSTANCE = new ClientFrame();
+
+    private static ClientFrame getInstance(){
+        return INSTANCE;
+    }
+
     TextArea textArea = new TextArea();
     TextField textField = new TextField();
+    Client client =null;
 
     public ClientFrame(){
         this.setSize(600,400);
@@ -16,17 +24,32 @@ public class ClientFrame extends Frame {
         textField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textArea.setText(textArea.getText()+textField.getText());
+                client.send(textField.getText());
+                //textArea.setText(textArea.getText()+textField.getText());
                 textField.setText("");
             }
         });
 
-        this.setVisible(true);
-        new Client().connect();
+
+
+//        this.setVisible(true);
+//        this.connectToServer();
+
+    }
+
+    private void connectToServer(){
+        client = new Client();
+        client.connect();
 
     }
 
     public static void main(String[] args) {
-        new ClientFrame();
+        ClientFrame clientFrame = ClientFrame.INSTANCE;
+        clientFrame.setVisible(true);
+        clientFrame.connectToServer();
+    }
+
+    public void updateText(String msgAccepted) {
+        this.textArea.setText(textArea.getText()+System.getProperty("line.separator")+msgAccepted);
     }
 }
