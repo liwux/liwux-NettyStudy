@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e8ad9a5-31eb-4db7-86c2-d6b397559a5c" name="Changes" comment="add v2 , clientFrame 实现界面">
+    <list default="true" id="2e8ad9a5-31eb-4db7-86c2-d6b397559a5c" name="Changes" comment="增加多个聊天窗口">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/liwux/io/V2/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/liwux/io/V2/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/liwux/io/V2/ClientFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/liwux/io/V2/ClientFrame.java" afterDir="false" />
@@ -144,7 +144,7 @@
       <workItem from="1661908810842" duration="8642000" />
       <workItem from="1661994177133" duration="1196000" />
       <workItem from="1662008650814" duration="8681000" />
-      <workItem from="1662019824797" duration="2127000" />
+      <workItem from="1662019824797" duration="4022000" />
     </task>
     <task id="LOCAL-00001" summary="Netty Server">
       <created>1661942243933</created>
@@ -160,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662009928385</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="增加多个聊天窗口">
+      <created>1662022785065</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1662022785065</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +187,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Netty Server" />
     <MESSAGE value="add v2 , clientFrame 实现界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="add v2 , clientFrame 实现界面" />
+    <MESSAGE value="增加多个聊天窗口" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加多个聊天窗口" />
   </component>
 </project>
